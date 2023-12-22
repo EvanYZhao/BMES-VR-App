@@ -1,8 +1,9 @@
 import Avatar from "./components/Avatar";
+import Cylinder from "./components/Cylinder";
 
 function App() {
   return (
-    <Avatar />
+    <Cylinder />
   );
 } 
 

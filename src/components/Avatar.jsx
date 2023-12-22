@@ -32,6 +32,7 @@ export default function Avatar() {
 
     // Set up orbit controls
     var controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = false;
 
     // Load model
     let mixer;
