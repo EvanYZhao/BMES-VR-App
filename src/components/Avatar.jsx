@@ -1,83 +1,129 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 export default function Avatar() {
+  let scene, camera, renderer, orbit, lights, loader, mesh;
+
   const mountRef = useRef(null);
 
-  useEffect(() => {
+  const [bend, setBend] = useState(4);
+
+  async function initScene() {
     // Initialize scene
-    var scene = new THREE.Scene();
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x444444);
 
     // Initialize camera
-    var camera = new THREE.PerspectiveCamera(
-      75,
+    camera = new THREE.PerspectiveCamera(
+      45,
       window.innerWidth / window.innerHeight,
       0.1,
-      1000
+      200
     );
+    camera.position.z = 5;
 
     // Initialize renderer
-    var renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current.appendChild(renderer.domElement);
 
-    // Add lights to scene (still need to play around with these)
-    var directionalLight = new THREE.DirectionalLight(0xffffff, 5);
-    directionalLight.position.set(0, 32, 0);
-    scene.add(directionalLight);
-    var ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
-
     // Set up orbit controls
-    var controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableZoom = false;
+    orbit = new OrbitControls(camera, renderer.domElement);
+    orbit.enableZoom = false;
 
-    // Load model
-    let mixer;
-    const loader = new GLTFLoader();
-    loader.load(
-      "/src/assets/animals.glb",
-      (gltf) => {
-        scene.add(gltf.scene);
+    // Add lights to scene (still need to play around with these)
+    lights = [];
+    lights[0] = new THREE.DirectionalLight(0xffffff, 3);
+    lights[1] = new THREE.DirectionalLight(0xffffff, 3);
+    lights[2] = new THREE.DirectionalLight(0xffffff, 3);
 
-        mixer = new THREE.AnimationMixer(gltf.scene);
-        const clips = gltf.animations;
-        clips.forEach(function (clip) {
-          const action = mixer.clipAction(clip);
-          action.play();
-        });
+    lights[0].position.set(0, 10, 0);
+    lights[1].position.set(10, 20, 10);
+    lights[2].position.set(-10, -20, -10);
 
-        camera.position.z = 4;
-      },
-      (xhr) => {
-        // Log progress while loading
-        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-      },
-      (error) => {
-        // If there is error, log it into console
-        console.error(error);
-      }
-    );
+    scene.add(lights[0]);
+    scene.add(lights[1]);
+    scene.add(lights[2]);
 
-    // Animate function
-    const clock = new THREE.Clock();
-    var animate = function () {
-      if (mixer) {
-        mixer.update(clock.getDelta());
-      }
-      renderer.render(scene, camera);
-    };
-    renderer.setAnimationLoop(animate);
-
-    // Window resize listener
-    let onWindowResize = function () {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    };
     window.addEventListener("resize", () => onWindowResize(), false);
+    await loadModel()
+      .then((loadedMesh) => {
+        mesh = loadedMesh;
+      })
+      .catch((error) => {
+        console.error("Error occurred loading mesh", error);
+      });
+  }
+
+  // Loading in character model
+  async function loadModel() {
+    loader = new GLTFLoader();
+    return new Promise((resolve, reject) => {
+      loader.load(
+        "/src/assets/avatar.glb",
+        (gltf) => {
+          scene.add(gltf.scene);
+          gltf.scene.rotation.y = (3 * Math.PI) / 2;
+          gltf.scene.position.y = -0.7;
+          let returnMesh =
+            gltf.scene.children[0].children[0].children[0].children[1];
+          resolve(returnMesh);
+          for (let i = 15; i < 18; i++) {
+            returnMesh.skeleton.bones[i].rotation.x =
+              bend / returnMesh.skeleton.bones.length;
+          }
+        },
+        (xhr) => {},
+        (error) => {
+          // If there is error, log it into console
+          console.error(error);
+          reject(error);
+        }
+      );
+    });
+  }
+
+  function render() {
+    requestAnimationFrame(render);
+
+    for (let i = 15; i < 18; i++) {
+      mesh.skeleton.bones[i].rotation.x = bend / mesh.skeleton.bones.length; // -49 < x < 41
+    }
+
+    renderer.render(scene, camera);
+  }
+
+  // Window resize listener
+  function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+
+  function flexion() {
+    setBend((prevBend) => prevBend + 1);
+  }
+
+  function extension() {
+    setBend((prevBend) => prevBend - 1);
+  }
+
+  function resetModel() {
+    setBend(4);
+  }
+
+  function resetCamera() {
+    camera.position.set(0, 0, 5);
+    camera.rotation.set(0, 0, 0);
+  }
+
+  useEffect(() => {
+    (async () => {
+      await initScene();
+      render();
+    })();
 
     // Clean up on component unmount
     return () => {
@@ -85,7 +131,17 @@ export default function Avatar() {
       renderer.dispose();
       mountRef.current.removeChild(renderer.domElement);
     };
-  }, []);
+  }, [bend]);
 
-  return <div ref={mountRef}></div>;
+  return (
+    <div>
+      <div className="avatar-control-panel">
+        <button onClick={flexion}>Flex</button>
+        <button onClick={extension}>Extend</button>
+        <button onClick={resetModel}>Reset Model</button>
+        <button onClick={resetCamera}>Reset Camera</button>
+      </div>
+      <div ref={mountRef}></div>;
+    </div>
+  );
 }

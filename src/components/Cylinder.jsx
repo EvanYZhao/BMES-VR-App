@@ -198,11 +198,11 @@ export default function Cylinder() {
       renderer.dispose();
       cylRef.current.removeChild(renderer.domElement);
     };
-  }, [flexion, extension, resetModel]);
+  }, [bend]);
 
   return (
     <div>
-      <div className="control-panel">
+      <div className="cylinder-control-panel">
         <button onClick={flexion}>Flex</button>
         <button onClick={extension}>Extend</button>
         <button onClick={resetModel}>Reset Model</button>

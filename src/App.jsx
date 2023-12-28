@@ -3,7 +3,7 @@ import Cylinder from "./components/Cylinder";
 import "./App.css";
 
 function App() {
-  return <Cylinder />;
+  return <Avatar />;
 }
 
 export default App;
