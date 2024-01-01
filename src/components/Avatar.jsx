@@ -3,6 +3,8 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
+var modelCache = {};
+
 export default function Avatar() {
   let scene, camera, renderer, orbit, lights, loader, mesh;
 
@@ -10,7 +12,7 @@ export default function Avatar() {
 
   const [bend, setBend] = useState(4);
 
-  async function initScene() {
+  function initScene() {
     // Initialize scene
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x444444);
@@ -48,13 +50,6 @@ export default function Avatar() {
     scene.add(lights[2]);
 
     window.addEventListener("resize", () => onWindowResize(), false);
-    await loadModel()
-      .then((loadedMesh) => {
-        mesh = loadedMesh;
-      })
-      .catch((error) => {
-        console.error("Error occurred loading mesh", error);
-      });
   }
 
   // Loading in character model
@@ -67,17 +62,17 @@ export default function Avatar() {
           scene.add(gltf.scene);
           gltf.scene.rotation.y = (3 * Math.PI) / 2;
           gltf.scene.position.y = -0.7;
-          let returnMesh =
+          let returnedMesh =
             gltf.scene.children[0].children[0].children[0].children[1];
-          resolve(returnMesh);
           for (let i = 15; i < 18; i++) {
-            returnMesh.skeleton.bones[i].rotation.x =
-              bend / returnMesh.skeleton.bones.length;
+            returnedMesh.skeleton.bones[i].rotation.x =
+              bend / returnedMesh.skeleton.bones.length;
           }
+          modelCache["model"] = gltf.scene;
+          resolve(modelCache["model"]);
         },
         (xhr) => {},
         (error) => {
-          // If there is error, log it into console
           console.error(error);
           reject(error);
         }
@@ -91,6 +86,10 @@ export default function Avatar() {
     for (let i = 15; i < 18; i++) {
       mesh.skeleton.bones[i].rotation.x = bend / mesh.skeleton.bones.length; // -49 < x < 41
     }
+
+    mesh.skeleton.update();
+
+    mesh.updateMatrixWorld(true);
 
     renderer.render(scene, camera);
   }
@@ -121,7 +120,22 @@ export default function Avatar() {
 
   useEffect(() => {
     (async () => {
-      await initScene();
+      initScene();
+
+      if (modelCache["model"]) {
+        mesh =
+          modelCache["model"].children[0].children[0].children[0].children[1];
+        scene.add(modelCache["model"]);
+      } else {
+        await loadModel()
+          .then((loadedModel) => {
+            mesh = loadedModel.children[0].children[0].children[0].children[1]
+          })
+          .catch((error) => {
+            console.error("Error occurred loading mesh", error);
+          });
+      }
+
       render();
     })();
 

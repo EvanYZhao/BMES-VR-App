@@ -3,7 +3,7 @@ import Cylinder from "./components/Cylinder";
 import "./App.css";
 
 function App() {
-  return <Avatar />;
+  return <Avatar /*bend={-49}*/ />;
 }
 
 export default App;

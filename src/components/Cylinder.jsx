@@ -160,7 +160,7 @@ export default function Cylinder() {
 
     mesh.skeleton.update();
 
-    mesh.updateWorldMatrix(true);
+    mesh.updateMatrixWorld(true);
 
     renderer.render(scene, camera);
   }
