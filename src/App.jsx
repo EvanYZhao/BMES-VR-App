@@ -1,9 +1,11 @@
+import { useState } from "react";
 import Avatar from "./components/Avatar";
-import Cylinder from "./components/Cylinder";
 import "./App.css";
 
 function App() {
-  return <Avatar /*bend={-49}*/ />;
+  const [bend, setBend] = useState(4);
+  
+  return <Avatar bend={bend} setBend={setBend} />;
 }
 
 export default App;

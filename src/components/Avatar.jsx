@@ -1,16 +1,14 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 var modelCache = {};
 
-export default function Avatar() {
+export default function Avatar({ bend, setBend }) {
   let scene, camera, renderer, orbit, lights, loader, mesh;
 
   const mountRef = useRef(null);
-
-  const [bend, setBend] = useState(4);
 
   function initScene() {
     // Initialize scene
@@ -129,7 +127,7 @@ export default function Avatar() {
       } else {
         await loadModel()
           .then((loadedModel) => {
-            mesh = loadedModel.children[0].children[0].children[0].children[1]
+            mesh = loadedModel.children[0].children[0].children[0].children[1];
           })
           .catch((error) => {
             console.error("Error occurred loading mesh", error);
