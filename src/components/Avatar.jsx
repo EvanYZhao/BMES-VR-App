@@ -18,15 +18,15 @@ export default function Avatar({ bend, setBend }) {
     // Initialize camera
     camera = new THREE.PerspectiveCamera(
       45,
-      window.innerWidth / window.innerHeight,
+      window.innerWidth / 3.3 / (window.innerHeight / 2),
       0.1,
       200
     );
-    camera.position.z = 5;
+    camera.position.z = 3;
 
     // Initialize renderer
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth / 3.3, window.innerHeight / 2);
     mountRef.current.appendChild(renderer.domElement);
 
     // Set up orbit controls
@@ -46,8 +46,6 @@ export default function Avatar({ bend, setBend }) {
     scene.add(lights[0]);
     scene.add(lights[1]);
     scene.add(lights[2]);
-
-    window.addEventListener("resize", () => onWindowResize(), false);
   }
 
   // Loading in character model
@@ -59,13 +57,20 @@ export default function Avatar({ bend, setBend }) {
         (gltf) => {
           scene.add(gltf.scene);
           gltf.scene.rotation.y = (3 * Math.PI) / 2;
-          gltf.scene.position.y = -0.7;
+          gltf.scene.position.y = -0.9;
           let returnedMesh =
             gltf.scene.children[0].children[0].children[0].children[1];
           for (let i = 15; i < 18; i++) {
             returnedMesh.skeleton.bones[i].rotation.x =
               bend / returnedMesh.skeleton.bones.length;
           }
+          // Left arm
+          returnedMesh.skeleton.bones[19].rotation.z = 5.1;
+          returnedMesh.skeleton.bones[20].rotation.x = 0;
+
+          // Right arm
+          returnedMesh.skeleton.bones[44].rotation.z = -5.1;
+          returnedMesh.skeleton.bones[45].rotation.x = 0;
           modelCache["model"] = gltf.scene;
           resolve(modelCache["model"]);
         },
@@ -92,13 +97,6 @@ export default function Avatar({ bend, setBend }) {
     renderer.render(scene, camera);
   }
 
-  // Window resize listener
-  function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  }
-
   function flexion() {
     setBend((prevBend) => prevBend + 1);
   }
@@ -112,7 +110,7 @@ export default function Avatar({ bend, setBend }) {
   }
 
   function resetCamera() {
-    camera.position.set(0, 0, 5);
+    camera.position.set(0, 0, 3);
     camera.rotation.set(0, 0, 0);
   }
 
@@ -135,25 +133,25 @@ export default function Avatar({ bend, setBend }) {
       }
 
       render();
+      console.log(mesh);
     })();
 
     // Clean up on component unmount
     return () => {
-      window.removeEventListener("resize", onWindowResize);
       renderer.dispose();
       mountRef.current.removeChild(renderer.domElement);
     };
   }, [bend]);
 
   return (
-    <div>
+    <div className="avatar-container">
       <div className="avatar-control-panel">
         <button onClick={flexion}>Flex</button>
         <button onClick={extension}>Extend</button>
         <button onClick={resetModel}>Reset Model</button>
         <button onClick={resetCamera}>Reset Camera</button>
       </div>
-      <div ref={mountRef}></div>;
+      <div ref={mountRef}></div>
     </div>
   );
 }
