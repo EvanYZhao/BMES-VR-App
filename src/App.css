@@ -4,6 +4,10 @@
     align-items: center;
 }
 
-.avatar-control-panel {
+.avatar-control-panel-1 {
+    justify-content: center;
+}
+
+.avatar-control-panel-2 {
     justify-content: center;
 }

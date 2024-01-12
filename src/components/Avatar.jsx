@@ -8,6 +8,8 @@ var modelCache = {};
 export default function Avatar({ bend, setBend }) {
   let scene, camera, renderer, orbit, lights, loader, mesh;
 
+  const state = { animateBones: false };
+
   const mountRef = useRef(null);
 
   function initScene() {
@@ -86,8 +88,18 @@ export default function Avatar({ bend, setBend }) {
   function render() {
     requestAnimationFrame(render);
 
+    let factor = Math.sin(Date.now() * 0.001);
+
+    if (state.animateBones) {
+      if (factor < 0) {
+        setBend(30 * factor);
+      } else {
+        setBend(41 * factor);
+      }
+    }
+
     for (let i = 15; i < 18; i++) {
-      mesh.skeleton.bones[i].rotation.x = bend / mesh.skeleton.bones.length; // -49 < x < 41
+      mesh.skeleton.bones[i].rotation.x = bend / mesh.skeleton.bones.length; // -30 < x < 41
     }
 
     mesh.skeleton.update();
@@ -133,7 +145,6 @@ export default function Avatar({ bend, setBend }) {
       }
 
       render();
-      console.log(mesh);
     })();
 
     // Clean up on component unmount
