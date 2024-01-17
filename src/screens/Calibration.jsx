@@ -8,7 +8,7 @@ function Calibration() {
   return (
     <>
     <div className={"instruction-container"}>
-        <h1 className={"calibration-header"}>Calibration Page</h1>
+        <h1 className={"calibration-header"}>Calibration Model</h1>
 
         <Avatar bend={bend} setBend={setBend} />
 
