@@ -7,8 +7,8 @@ function Calibration() {
 
   return (
     <>
-    <div className={"instruction-box"}>
-        <h1>Calibration Page</h1>
+    <div className={"instruction-container"}>
+        <h1 className={"calibration-header"}>Calibration Page</h1>
 
         <Avatar bend={bend} setBend={setBend} />
 
@@ -18,7 +18,7 @@ function Calibration() {
             - TODO: establish various basic API routes (get, post, etc.) */}
 
         <button className={"instruction-button"}>
-            this is as far as I can go
+        ✨ this is as far as I can go ✨
         </button>
     </div>
     </>
