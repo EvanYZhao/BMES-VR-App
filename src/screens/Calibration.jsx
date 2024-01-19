@@ -9,10 +9,6 @@ function Calibration() {
     const [bend, setBend] = useState(4);
     const navigate = useNavigate();
 
-    function navigateHome() {
-        navigate("/");
-    }
-
     return (
     
         <div className={"instruction-container"}>
