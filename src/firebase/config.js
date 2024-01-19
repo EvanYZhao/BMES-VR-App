@@ -7,12 +7,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyClLEFdF8YlkMDhaNpp8bhmfGBA36qJsYc",
-  authDomain: "bmes-vr-app.firebaseapp.com",
-  projectId: "bmes-vr-app",
-  storageBucket: "bmes-vr-app.appspot.com",
-  messagingSenderId: "152788343055",
-  appId: "1:152788343055:web:d8f3d3f6b350fb4509c67a"
+   apiKey: "AIzaSyClLEFdF8YlkMDhaNpp8bhmfGBA36qJsYc",
+   authDomain: "bmes-vr-app.firebaseapp.com",
+   projectId: "bmes-vr-app",
+   storageBucket: "bmes-vr-app.appspot.com",
+   messagingSenderId: "152788343055",
+   appId: "1:152788343055:web:d8f3d3f6b350fb4509c67a",
 };
 
 // Initialize Firebase
