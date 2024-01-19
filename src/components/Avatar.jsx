@@ -164,7 +164,9 @@ export default function Avatar({ bend, setBend }) {
         // Clean up on component unmount
         return () => {
             renderer.dispose();
-            mountRef.current.removeChild(renderer.domElement);
+            if (mountRef.current) {
+                mountRef.current.removeChild(renderer.domElement);
+            }
             window.removeEventListener('resize', onWindowResize, false);
         };
     }, [bend]);
