@@ -7,10 +7,6 @@ function Calibration() {
     const [bend, setBend] = useState(4);
     const navigate = useNavigate();
 
-    function navigateHome() {
-        navigate("/");
-    }
-
     return (
         <div className={"instruction-container"}>
             <h1 className={"calibration-header"}>Calibration Model</h1>
@@ -25,7 +21,7 @@ function Calibration() {
             <button className={"instruction-button"}>
                 ✨ this is as far as I can go ✨
             </button>
-            <button onClick={navigateHome}>Go to Home Page</button>
+            <button onClick={() => navigate("/")}>Go to Home Page</button>
         </div>
     );
 }
