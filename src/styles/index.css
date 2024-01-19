@@ -53,6 +53,14 @@ button {
     cursor: pointer;
 }
 
+circular-metric {
+    display:flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+
+
 button:hover {
     border-color: #646cff;
 }

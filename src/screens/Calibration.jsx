@@ -3,6 +3,7 @@ import "../styles/Calibration.css";
 import Avatar from "../components/Avatar";
 import { useNavigate } from "react-router-dom";
 import Progress from 'react-circle-progress-bar'
+import CircularMetric from "../components/CircularMetrics";
 
 function Calibration() {
     const [bend, setBend] = useState(4);
@@ -13,6 +14,7 @@ function Calibration() {
     }
 
     return (
+    
         <div className={"instruction-container"}>
           <div className = {"internal-instruction-container"}>
             <h1 className={"calibration-header"}>Calibration Model</h1>
@@ -31,14 +33,16 @@ function Calibration() {
          </div>
          <div className={"text-container"}>
           <h1>Instruction 1: Move forward and back</h1>
-            <div>
-              <Progress progress={40} color={"red"}></Progress>
-              <h2>flexion</h2>
+          {/* TODO: make progress bar stuff into a component */}
+          <div className={"circular-metrics"}>
+            <div className = {"flexion-metric"}>
+            <CircularMetric  name="flexion" flexion_score={80}></CircularMetric>
             </div>
-            <div>
-              <Progress progress={80} color={"red"}></Progress>
-              <h2>extension</h2>
+            <div className = {"extension-metric"}>
+            <CircularMetric name="extension" flexion_score={50}></CircularMetric>
             </div>
+          </div>
+          <button>press this button when you can't move anymore!</button>
          </div>
         </div>
     );

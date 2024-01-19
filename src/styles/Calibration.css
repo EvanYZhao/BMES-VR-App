@@ -44,9 +44,24 @@
     padding: 15px;
 }
 
-.circular-progress-bar {
+.circular-metrics {
+    display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.flex-metric {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.extension-metric {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 50px;
 }
 
 
