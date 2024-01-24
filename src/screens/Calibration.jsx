@@ -7,7 +7,6 @@ import CircularMetric from "../components/CircularMetrics";
 
 function Calibration() {
     const [bend, setBend] = useState(4);
-    const navigate = useNavigate();
 
     return (
     
@@ -25,7 +24,6 @@ function Calibration() {
             <button className={"instruction-button"}>
                 ✨ this is as far as I can go ✨
             </button>
-            <button onClick={navigateHome}>Go to Home Page</button>
          </div>
          <div className={"text-container"}>
           <h1>Instruction 1: Move forward and back</h1>
