@@ -36,12 +36,12 @@
 }
 
 .calibration-header {
-    justify-content: center;
-    font-family:monospace;
-    font-size: 40px;
-    font-weight: bolder;
-    margin: 20px;
-    padding: 15px;
+   justify-content: center;
+   font-family: monospace;
+   font-size: 40px;
+   font-weight: bolder;
+   margin: 20px;
+   padding: 15px;
 }
 
 .circular-metrics {

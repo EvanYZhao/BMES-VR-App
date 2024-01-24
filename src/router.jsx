@@ -1,18 +1,34 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./screens/Home";
 import Calibration from "./screens/Calibration";
-import Test from "./screens/Test";
+import Home from "./screens/Home";
+import SignIn from "./screens/SignIn";
+import { AuthContextProvider } from "./context/AuthContext.jsx";
+import Protected from "./components/Protected.jsx";
 
 const Router = () => {
-    return (
-        <>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/calibration" element={<Calibration />} />
-                <Route path="/test" element={<Test />} />
-            </Routes>
-        </>
-    );
+   return (
+      <AuthContextProvider>
+         <Routes>
+            <Route
+               path="/"
+               element={
+                  <Protected>
+                     <Home />
+                  </Protected>
+               }
+            />
+            <Route
+               path="/calibration"
+               element={
+                  <Protected>
+                     <Calibration />
+                  </Protected>
+               }
+            />
+            <Route path="/signin" element={<SignIn />} />
+         </Routes>
+      </AuthContextProvider>
+   );
 };
 
 export default Router;
