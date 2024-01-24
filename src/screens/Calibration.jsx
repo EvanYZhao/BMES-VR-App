@@ -25,7 +25,7 @@ function Calibration() {
             <button className={"instruction-button"}>
                 ✨ this is as far as I can go ✨
             </button>
-            <button onClick={navigateHome}>Go to Home Page</button>
+            <button onClick={() => {navigate("/")}}>Go to Home Page</button>
          </div>
          <div className={"text-container"}>
           <h1>Instruction 1: Move forward and back</h1>
