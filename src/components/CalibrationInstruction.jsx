@@ -21,6 +21,11 @@ export default function CalibrationInstruction({ flexion_score, extension_score 
       }
     };
 
+    //handle first click to allow to move to next instruction
+    const handleInputValue = () => {
+    {/* TODO: make it so that next instruction is not clickable until user clicks the "this is as far as I can go"*/}
+    } 
+
     return (
     
         <div className={"instruction-container"}>
