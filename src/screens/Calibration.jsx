@@ -2,8 +2,9 @@ import { useState } from "react";
 import "../styles/Calibration.css";
 import Avatar from "../components/Avatar";
 import { useNavigate } from "react-router-dom";
-import Progress from 'react-circle-progress-bar'
 import CircularMetric from "../components/CircularMetrics";
+import CalibrationInstruction from "../components/CalibrationInstruction";
+
 
 function Calibration() {
    const [bend, setBend] = useState(4);
@@ -27,19 +28,7 @@ function Calibration() {
             </button>
             <button onClick={() => {navigate("/")}}>Go to Home Page</button>
          </div>
-         <div className={"text-container"}>
-          <h1>Instruction 1: Move forward and back</h1>
-          {/* TODO: make progress bar stuff into a component */}
-          <div className={"circular-metrics"}>
-            <div className = {"flexion-metric"}>
-            <CircularMetric  name="flexion" flexion_score={80}></CircularMetric>
-            </div>
-            <div className = {"extension-metric"}>
-            <CircularMetric name="extension" flexion_score={50}></CircularMetric>
-            </div>
-          </div>
-          <button>press this button when you can't move anymore!</button>
-         </div>
+         <CalibrationInstruction instruction_number="2" flexion_score={90} extension_score={50}></CalibrationInstruction>
         </div>
     );
 }
