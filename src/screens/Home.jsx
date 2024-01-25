@@ -7,18 +7,18 @@ import "../styles/Home.css";
 import { UserAuth } from "../context/AuthContext";
 
 function Home() {
-   const [bend, setBend] = useState(4);
+   const [bend, setBend] = useState(4); // -30 < x < 41
    const navigate = useNavigate();
 
    const { logOut } = UserAuth();
 
    const handleSignOut = async () => {
       try {
-         await logOut()
+         await logOut();
       } catch (error) {
-         console.log(error)
+         console.log(error);
       }
-   }
+   };
 
    return (
       <div className="home-wrapper">
@@ -44,7 +44,9 @@ function Home() {
             </button>
          </div>
          <div className="home-log-out-row">
-            <button style={{color: "#970C10"}} onClick={handleSignOut}>Log Out</button>
+            <button style={{ color: "#970C10" }} onClick={handleSignOut}>
+               Log Out
+            </button>
          </div>
       </div>
    );
