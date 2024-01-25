@@ -3,30 +3,10 @@ import "../styles/Calibration.css";
 import Avatar from "../components/Avatar";
 import { useNavigate } from "react-router-dom";
 import CircularMetric from "../components/CircularMetrics";
-import Database from "../database/firestore";
-import { UserAuth } from "../context/AuthContext";
 
 function Calibration() {
    const [bend, setBend] = useState(4);
    const navigate = useNavigate();
-
-   const calibrationDatabase = new Database("calibrations");
-
-   const { user } = UserAuth();
-
-   function storeCalibrationData(extension_score, flexion_score) {
-      calibrationDatabase
-         .storeCalibration(user.uid, {
-            extension: extension_score,
-            flexion: flexion_score,
-         })
-         .then(() => {
-            console.log("Stored calibration data successfully");
-         })
-         .catch((error) => {
-            console.log(`Error occurred: ${error}`);
-         });
-   }
 
    return (
       <div className={"instruction-container"}>
@@ -68,7 +48,7 @@ function Calibration() {
                   ></CircularMetric>
                </div>
             </div>
-            <button onClick={() => {storeCalibrationData(-30, 41)}}>
+            <button>
                press this button when you can't move anymore!
             </button>
          </div>
