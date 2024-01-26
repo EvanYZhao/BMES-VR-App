@@ -45,7 +45,7 @@ export default function CalibrationInstruction({ flexion_score, extension_score 
                                 <div>
                                     <h1 className={"calibration-header"}>follow the series of calibration instructions</h1>
                                     <h1 className={"calibration-header"}>click the button below to begin!</h1>
-                                    <button onClick={increase}>begin</button>
+                                    <button className={"calibration-button"} onClick={increase}>begin</button>
                                 </div>,
                             '1':
                                 <div className={"instruction-container"}>
@@ -59,15 +59,13 @@ export default function CalibrationInstruction({ flexion_score, extension_score 
                                         - TODO: set up API route to POST max/min bend calibration values to database
                                         - TODO: establish various basic API routes (get, post, etc.) */}
 
-                                        <button className={"instruction-button"}>
-                                            ✨ this is as far as I can go ✨
-                                        </button>
                                         <button
+                                            className={"calibration-button"}
                                             onClick={() => {
                                                 navigate("/");
                                             }}
                                         >
-                                            Go to Home Page
+                                            Go to Home Page 🏠
                                         </button>
                                     </div>
                                     <div className="metrics-instruction-container">
@@ -81,8 +79,8 @@ export default function CalibrationInstruction({ flexion_score, extension_score 
                                             </div>
                                         </div>
                                         <div className="button-holder">
-                                            <button onClick={handleInputValue}>this is as far as I can go!</button>
-                                            <button onClick={increase} disabled={input == 0}>next</button>
+                                            <button className={"calibration-button"} onClick={handleInputValue}>this is as far as I can go!</button>
+                                            <button className={"calibration-button"} onClick={increase} disabled={input == 0}>next</button>
                                         </div>
                                     </div>
                                 </div>,
@@ -98,15 +96,13 @@ export default function CalibrationInstruction({ flexion_score, extension_score 
                                         - TODO: set up API route to POST max/min bend calibration values to database
                                         - TODO: establish various basic API routes (get, post, etc.) */}
 
-                                        <button className={"instruction-button"}>
-                                            ✨ this is as far as I can go ✨
-                                        </button>
                                         <button
+                                            className={"calibration-button"}
                                             onClick={() => {
                                                 navigate("/");
                                             }}
                                         >
-                                            Go to Home Page
+                                            Go to Home Page 🏠
                                         </button>
                                     </div>
                                     <div className="metrics-instruction-container">
@@ -120,20 +116,22 @@ export default function CalibrationInstruction({ flexion_score, extension_score 
                                         </div>
                                     </div>
                                     <div className="button-holder">
-                                        <button onClick={handleInputValue}>this is as far as I can go!</button>
-                                        <button onClick={increase} disabled={input == 1}>next</button>
+                                        <button className={"calibration-button"} onClick={handleInputValue}>this is as far as I can go!</button>
+                                        <button className={"calibration-button"} onClick={increase} disabled={input == 1}>next</button>
                                     </div>
                                 </div>
                                 </div>,
                             '3':
-                                <div>
+                                <div className={"vertical-container"}>
                                     <h1>congrats! you're done calibrating :{")"}</h1>
-                                    <button onClick={() => navigate("/")}>
+                                    <div className={"horizontal-container"}>
+                                    <button className={"calibration-button"} onClick={() => navigate("/")}>
                                         take me home
                                     </button>
-                                    <button onClick={reset}>
+                                    <button className={"calibration-button"} onClick={reset}>
                                         restart calibration
                                     </button>
+                                    </div>
                                 </div>
                         }[counter]
                     }

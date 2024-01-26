@@ -77,3 +77,20 @@
     flex-direction: column;
     align-items:center;
 }
+
+.vertical-container{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+.horizontal-container{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+}
+
+.calibration-button{
+    margin: 10px;
+    font-size: 20px;
+}
