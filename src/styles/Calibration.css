@@ -1,0 +1,71 @@
+.instruction-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 1000px;
+    margin: 20px;
+}
+
+.internal-instruction-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-color:#646cff;
+    border-style:solid;
+    text-align: center;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-style:none;
+    border-radius: 0px;
+    margin: 50px;
+    flex-wrap: wrap;
+    text-align: center;
+
+}
+
+.instruction-button {
+    justify-content: center;
+    font-family:monospace;
+    font-size: 20px;
+    font-weight: bolder;
+    padding: 15px;
+}
+
+.calibration-header {
+   justify-content: center;
+   font-family: monospace;
+   font-size: 40px;
+   font-weight: bolder;
+   margin: 20px;
+   padding: 15px;
+}
+
+.circular-metrics {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flex-metric {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.extension-metric {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 50px;
+}
+
+.button-holder{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}

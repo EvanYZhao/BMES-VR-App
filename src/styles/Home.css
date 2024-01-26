@@ -1,0 +1,49 @@
+.avatar-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.avatar-control-panel {
+   justify-content: center;
+}
+
+.home-wrapper {
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   position: absolute;
+   left: 0px;
+   right: 0px;
+   top: 0px;
+}
+
+.home-top-row {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   align-items: center;
+   translate: -2.5em;
+}
+
+.home-bottom-row {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+}
+
+.home-log-out-row {
+   display: flex;
+   justify-content: center;
+}
+
+.avatar-and-controls {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.recalibrate-button {
+   translate: 5.2em;
+}
