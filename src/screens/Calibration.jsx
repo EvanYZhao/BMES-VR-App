@@ -2,9 +2,7 @@ import { useState } from "react";
 import "../styles/Calibration.css";
 import Avatar from "../components/Avatar";
 import { useNavigate } from "react-router-dom";
-import CircularMetric from "../components/CircularMetrics";
 import CalibrationInstruction from "../components/CalibrationInstruction";
-
 
 function Calibration() {
    const [bend, setBend] = useState(4);
@@ -33,9 +31,13 @@ function Calibration() {
                Go to Home Page
             </button>
          </div>
-         <CalibrationInstruction instruction_number="2" flexion_score={90} extension_score={50}></CalibrationInstruction>
-        </div>
-    );
+         <CalibrationInstruction
+            instruction_number="2"
+            flexion_score={90}
+            extension_score={50}
+         ></CalibrationInstruction>
+      </div>
+   );
 }
 
 export default Calibration;

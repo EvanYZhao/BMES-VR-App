@@ -65,3 +65,5 @@ export default class Database {
       });
    }
 }
+
+export const calibrationCollection = new Database('calibrations')
