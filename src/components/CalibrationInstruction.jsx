@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "../styles/Calibration.css";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import CircularMetric from "../components/CircularMetrics";
 
 export default function CalibrationInstruction({ flexion_score, extension_score }) {
     const [counter, setCounter] = useState(0);
+    const [input, setInput] = useState(0);
     
     //reset counter
     const reset = () =>{
@@ -13,18 +14,23 @@ export default function CalibrationInstruction({ flexion_score, extension_score 
 
     //increase counter
     const increase = () => {
-      if(counter == 2){
-        reset();
-      }
-      else{
         setCounter(count => count + 1);
-      }
     };
 
     //handle first click to allow to move to next instruction
     const handleInputValue = () => {
-    {/* TODO: make it so that next instruction is not clickable until user clicks the "this is as far as I can go"*/}
+        if(input == 0 && counter ==1){
+            setInput(count => count + 1);
+        }
+        else if(input == 1 && counter == 2){
+            setInput(count => count + 1);
+        }
     } 
+
+    const navigate = useNavigate();
+
+    console.log("counter: " + counter)
+    console.log("input: " + counter)
 
     return (
     
@@ -52,8 +58,8 @@ export default function CalibrationInstruction({ flexion_score, extension_score 
                 </div>
                 </div>
                 <div className="button-holder">
-                    <button>this is as far as I can go!</button>
-                    <button onClick={increase}>next instruction</button>
+                    <button onClick={handleInputValue}>this is as far as I can go!</button>
+                    <button onClick={increase} disabled={input==0}>next</button>
                 </div>
                 </div> ,
                 '2':
@@ -68,10 +74,16 @@ export default function CalibrationInstruction({ flexion_score, extension_score 
                 </div>
                 </div>
                 <div className="button-holder">
-                    <button>this is as far as I can go!</button>
-                    <button onClick={increase}>next instruction</button>
+                    <button onClick={handleInputValue}>this is as far as I can go!</button>
+                    <button onClick={increase} disabled={input==1}>next</button>
                 </div>                
                 </div> ,
+                '3':
+                <div>
+                    <button onClick={() => navigate("/")}>
+                        i'm done calibrating!
+                    </button>
+                </div>
             }[counter]
         }  
          </div>
