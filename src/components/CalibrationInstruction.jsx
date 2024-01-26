@@ -1,11 +1,13 @@
 import { useState } from "react";
 import "../styles/Calibration.css";
+import Avatar from "../components/Avatar";
 import { Navigate, useNavigate } from "react-router-dom";
 import CircularMetric from "../components/CircularMetrics";
 
 export default function CalibrationInstruction({ flexion_score, extension_score }) {
     const [counter, setCounter] = useState(0);
     const [input, setInput] = useState(0);
+    const [bend, setBend] = useState(4);
     
     //reset counter
     const reset = () =>{
@@ -29,11 +31,29 @@ export default function CalibrationInstruction({ flexion_score, extension_score 
 
     const navigate = useNavigate();
 
-    console.log("counter: " + counter)
-    console.log("input: " + counter)
-
     return (
-    
+        <div className={"instruction-container"}>
+        <div className={"internal-instruction-container"}>
+        <h1 className={"calibration-header"}>Calibration Model</h1>
+
+        <Avatar bend={bend} setBend={setBend} />
+
+        {/* instruction button: we will likely need to store the appropriate bend value to the backend
+        - TODO: figure out database structure
+        - TODO: set up API route to POST max/min bend calibration values to database
+        - TODO: establish various basic API routes (get, post, etc.) */}
+
+        <button className={"instruction-button"}>
+           ✨ this is as far as I can go ✨
+        </button>
+        <button
+           onClick={() => {
+              navigate("/");
+           }}
+        >
+           Go to Home Page
+        </button>
+     </div>
         <div className={"instruction-container"}>
           
          <div className={"text-container"}>
@@ -87,6 +107,7 @@ export default function CalibrationInstruction({ flexion_score, extension_score 
             }[counter]
         }  
          </div>
+        </div>
         </div>
     );
 }
