@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    max-width: 1000px;
     margin: 20px;
+    max-width: 1200px;
 }
 
 .internal-instruction-container {
@@ -12,6 +12,14 @@
     align-items: center;
     border-color:#646cff;
     border-style:solid;
+    text-align: center;
+}
+
+.metrics-instruction-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
     text-align: center;
 }
 
@@ -68,4 +76,21 @@
     display: flex;
     flex-direction: column;
     align-items:center;
+}
+
+.vertical-container{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+.horizontal-container{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+}
+
+.calibration-button{
+    margin: 10px;
+    font-size: 20px;
 }
