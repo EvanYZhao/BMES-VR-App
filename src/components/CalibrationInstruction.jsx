@@ -31,7 +31,7 @@ export default function CalibrationInstruction({ flexion_score, extension_score 
     }
 
     const navigate = useNavigate();
-
+    console.log(bend);
     return (
         <div className={"instruction-container"}>
 
@@ -72,10 +72,10 @@ export default function CalibrationInstruction({ flexion_score, extension_score 
                                         <h1 className={"calibration-header"}>step 1: bend forward</h1>
                                         <div className={"circular-metrics"}>
                                             <div className={"flexion-metric"}>
-                                                <CircularMetric name="flexion" flexion_score={80}></CircularMetric>
+                                                <CircularMetric name="flexion" flexion_score={bend}></CircularMetric>
                                             </div>
                                             <div className={"extension-metric"}>
-                                                <CircularMetric name="extension" flexion_score={50}></CircularMetric>
+                                                <CircularMetric name="extension" flexion_score={0}></CircularMetric>
                                             </div>
                                         </div>
                                         <div className="button-holder">
@@ -109,10 +109,10 @@ export default function CalibrationInstruction({ flexion_score, extension_score 
                                     <h1 className={"calibration-header"}>step 2: bend backwards</h1>
                                     <div className={"circular-metrics"}>
                                         <div className={"flexion-metric"}>
-                                            <CircularMetric name="flexion" flexion_score={80}></CircularMetric>
+                                            <CircularMetric name="flexion" flexion_score={0}></CircularMetric>
                                         </div>
                                         <div className={"extension-metric"}>
-                                            <CircularMetric name="extension" flexion_score={50}></CircularMetric>
+                                            <CircularMetric name="extension" flexion_score={bend}></CircularMetric>
                                         </div>
                                     </div>
                                     <div className="button-holder">

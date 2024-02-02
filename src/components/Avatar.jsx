@@ -189,7 +189,7 @@ export default function Avatar({ bend, setBend }) {
 
    return (
       <div className="avatar-container">
-         <h1>{degrees} degrees</h1>
+         <p>{degrees} degrees</p>
          <div className="avatar-control-panel">
             <button onClick={flexion}>Flex</button>
             <button onClick={extension}>Extend</button>
