@@ -5,12 +5,13 @@ import Controls from "../components/Controls";
 import Metrics from "../components/Metrics";
 import "../styles/Home.css";
 import { UserAuth } from "../context/AuthContext";
+import { userCollection } from "../database/firestore";
 
 function Home() {
    const [bend, setBend] = useState(4); // -30 < x < 41
    const navigate = useNavigate();
 
-   const { logOut } = UserAuth();
+   const { logOut, user } = UserAuth();
 
    const handleSignOut = async () => {
       try {
@@ -18,6 +19,17 @@ function Home() {
       } catch (error) {
          console.log(error);
       }
+   };
+
+   const saveMetric = (numPumps=0, postureScore=null) => {
+      userCollection
+         .addMetric(user.uid, numPumps, postureScore)
+         .then((r) => {
+            console.log(r);
+         })
+         .catch((e) => {
+            console.log("Error occurred saving metric:", e);
+         });
    };
 
    return (
@@ -31,13 +43,15 @@ function Home() {
          </div>
          <div className="home-bottom-row">
             <button
-               onClick={() => console.log("Pumping air")}
+               onClick={() => saveMetric(3, 80)}
                className="pump-air-button"
             >
                Pump Air
             </button>
             <button
-               onClick={() => navigate("/calibration")}
+               onClick={() =>
+                  navigate("/calibration", { state: { isNewUser: false } })
+               }
                className="recalibrate-button"
             >
                Recalibrate
