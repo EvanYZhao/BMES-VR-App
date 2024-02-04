@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { calibrationCollection } from "../database/firestore";
+import { userCollection } from "../database/firestore";
 import { UserAuth } from "../context/AuthContext";
 
 const AuthRedirect = () => {
@@ -11,17 +11,15 @@ const AuthRedirect = () => {
       const checkUserEntry = async () => {
          if (user) {
             try {
-               const userEntry = await calibrationCollection.getCalibration(
-                  user.uid
-               );
+               const userEntry = await userCollection.getData(user.uid);
                if (userEntry) {
                   navigate("/");
                } else {
-                  navigate("/calibration");
+                  navigate("/calibration", { state: { isNewUser: true } });
                }
             } catch (error) {
                console.error("Error checking user entry:", error);
-               navigate("/calibration");
+               navigate("/calibration", { state: { isNewUser: true } });
             }
          }
       };

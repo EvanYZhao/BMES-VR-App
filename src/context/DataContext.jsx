@@ -1,5 +1,5 @@
 import { useContext, createContext, useState, useEffect } from "react";
-import { calibrationCollection } from "../database/firestore";
+import { userCollection } from "../database/firestore";
 import { UserAuth } from "./AuthContext";
 
 const DataContext = createContext();
@@ -10,10 +10,10 @@ export const DataContextProvider = ({ children }) => {
 
    useEffect(() => {
       if (!user) return;
-      calibrationCollection
-         .getCalibration(user.uid)
+      userCollection
+         .getData(user.uid)
          .then((data) => {
-            setCalibrationData(data);
+            setCalibrationData({extension: data.extension, flexion: data.flexion});
          })
          .catch((error) => {
             if (typeof error === "string" || error instanceof String) return;
