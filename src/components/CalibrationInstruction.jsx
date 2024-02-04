@@ -111,7 +111,6 @@ export default function CalibrationInstruction() {
                                         - TODO: figure out database structure
                                         - TODO: set up API route to POST max/min bend calibration values to database
                                         - TODO: establish various basic API routes (get, post, etc.) */}
-
                            <button
                               className={"calibration-button"}
                               onClick={() => {

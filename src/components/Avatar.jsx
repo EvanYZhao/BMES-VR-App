@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -6,11 +6,23 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 var modelCache = {};
 
 export default function Avatar({ bend, setBend }) {
+
+   const [degrees, setDegrees] = useState(0);
+
+   function scaleDegrees(degrees) {
+      let newDegrees = degrees + 4;
+      setDegrees(newDegrees-4);
+      return newDegrees;
+   }
+
+
    let scene, camera, renderer, orbit, lights, loader, mesh;
 
    const state = { animateBones: false };
 
    const mountRef = useRef(null);
+
+   console.log(degrees)
 
    function initScene() {
       // Initialize scene
@@ -110,15 +122,21 @@ export default function Avatar({ bend, setBend }) {
    }
 
    function flexion() {
-      setBend((prevBend) => prevBend + 1);
+      if(degrees < 180){
+         setBend((prevBend) => prevBend + 0.43);
+         setDegrees(degrees => degrees + 1);
+      }
    }
 
    function extension() {
-      setBend((prevBend) => prevBend - 1);
+      if(degrees > -90){
+         setBend((prevBend) => prevBend - 0.43);
+         setDegrees(degrees => degrees - 1);
+      }
    }
 
    function resetModel() {
-      setBend(4);
+      setBend(scaleDegrees(0));
    }
 
    function resetCamera() {
@@ -171,6 +189,7 @@ export default function Avatar({ bend, setBend }) {
 
    return (
       <div className="avatar-container">
+         <p>{degrees} degrees</p>
          <div className="avatar-control-panel">
             <button onClick={flexion}>Flex</button>
             <button onClick={extension}>Extend</button>
