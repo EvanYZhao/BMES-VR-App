@@ -10,11 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
     "firebase": "^10.7.2",
     "react": "^18.2.0",
+    "react-calendar": "^4.8.0",
     "react-circle-progress-bar": "^0.1.4",
     "react-dom": "^18.2.0",
     "react-google-button": "^0.7.2",
+    "react-pro-sidebar": "^1.1.0",
     "react-router-dom": "^6.21.2",
     "three": "^0.159.0"
   },

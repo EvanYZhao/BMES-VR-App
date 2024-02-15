@@ -56,6 +56,14 @@ function Home() {
             >
                Recalibrate
             </button>
+            <button
+               onClick={() =>
+                  navigate("/newhome", { state: { isNewUser: false } })
+               }
+               className="recalibrate-button"
+            >
+               Alternative Home Page
+            </button>
          </div>
          <div className="home-log-out-row">
             <button style={{ color: "#970C10" }} onClick={handleSignOut}>

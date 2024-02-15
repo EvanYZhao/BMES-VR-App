@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Calibration from "./screens/Calibration";
 import Home from "./screens/Home";
 import SignIn from "./screens/SignIn";
+import NewHome from "./screens/NewHome"
 import { AuthContextProvider } from "./context/AuthContext.jsx";
 import { DataContextProvider } from "./context/DataContext.jsx";
 import Protected from "./components/Protected.jsx";
@@ -26,6 +27,14 @@ const Router = () => {
                   element={
                      <Protected>
                         <Calibration />
+                     </Protected>
+                  }
+               />
+               <Route
+                  path="/newhome"
+                  element={
+                     <Protected>
+                        <NewHome />
                      </Protected>
                   }
                />
