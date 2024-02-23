@@ -5,6 +5,8 @@ import Controls from "../components/Controls";
 import Metrics from "../components/Metrics";
 import "../styles/NewHome.css";
 import Calendar from "react-calendar";
+import CircularMetric from "../components/CircularMetrics";
+
 
 
 import { UserAuth } from "../context/AuthContext";
@@ -36,22 +38,21 @@ function NewHome() {
             <Avatar bend={bend} setBend={setBend} />
             </div>
         </div>
+        <div>
         <div className="card-container">
             <div className='card-and-header'>
-            <h2>Metrics</h2>
+            <h2 className='header'>Metrics</h2>
+            <div className="card">
+              <CircularMetric size="sm"/>
+            </div>
+            <h2 className='header'>Trends</h2>
             <div className="card">
                 hi
             </div>
-            <h2>Trends</h2>
-            <div className="card">
-                hi
             </div>
-            </div>
-
-            <Calendar />
-
         </div>
-
+        </div>
+        
         </div>
       </div>
       </>

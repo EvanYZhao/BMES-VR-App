@@ -5,8 +5,8 @@
  }
  
  .inner-avatar-container{
-    background-color: grey;
-    border-radius: 10px;
+   border-style: solid;
+   border-color: white;
  }
  
  .avatar-control-panel {
@@ -98,10 +98,6 @@
     line-height: 1.125em;
   }
 
-  .button{
-    background-color: blue;
-  }
-
   .side-bar{
     background-color: #040011;
     border-right-style: solid;
@@ -112,3 +108,14 @@
     left: 0px;
     top: 0px;
   }
+
+  .calendar{
+   margin: 20px;
+   border-style: solid;
+   border-color:white;
+   border-width: 1px;
+ }
+
+ .circular-metric{
+   height: 50px;
+ }

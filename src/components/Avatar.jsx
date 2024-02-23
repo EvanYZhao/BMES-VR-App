@@ -27,7 +27,7 @@ export default function Avatar({ bend, setBend }) {
    function initScene() {
       // Initialize scene
       scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x444444);
+      scene.background = new THREE.Color("#1B1B27");
 
       // Initialize camera
       camera = new THREE.PerspectiveCamera(
