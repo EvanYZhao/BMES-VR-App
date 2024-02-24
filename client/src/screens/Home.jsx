@@ -6,16 +6,14 @@ import Metrics from "../components/Metrics";
 import "../styles/Home.css";
 import { UserAuth } from "../context/AuthContext";
 import { userCollection } from "../database/firestore";
-import useWebSocket from "react-use-websocket";
 
 function Home() {
-   const WS_URL = "ws://localhost:8080";
+   const { logOut, user } = UserAuth();
+   const WS_URL = `ws://localhost:8080?uid=${user.uid}`; // Change after server deployment
    const connection = useRef(null);
    const [bend, setBend] = useState(4); // -34.69 < x < 81.40
-   const [degrees, setDegrees] = useState(0) // -90 < x < 180
+   const [degrees, setDegrees] = useState(0); // -90 < x < 180
    const navigate = useNavigate();
-
-   const { logOut, user } = UserAuth();
 
    const handleSignOut = async () => {
       try {
@@ -48,17 +46,25 @@ function Home() {
          connection.current = ws;
       });
 
+      socket.addEventListener("close", () => {
+         connection.current = null;
+      });
+
       socket.addEventListener("message", (data) => {
          setBend(degreesToBend(parseFloat(data.data)));
-         setDegrees(data.data)
+         setDegrees(data.data);
       });
+
+      return () => {
+         socket.close()
+      }
    }, []);
 
    return (
       <div className="home-wrapper">
          <div className="home-top-row">
             <div className="avatar-and-controls">
-               <Avatar bend={bend} setBend={setBend} degrees={degrees}/>
+               <Avatar bend={bend} setBend={setBend} degrees={degrees} />
                <Controls />
             </div>
             <Metrics flexion_score={33} extension_score={78} />
