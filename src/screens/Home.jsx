@@ -6,6 +6,7 @@ import Metrics from "../components/Metrics";
 import "../styles/Home.css";
 import { UserAuth } from "../context/AuthContext";
 import { userCollection } from "../database/firestore";
+import {Navbar} from "../components/Navbar";
 
 function Home() {
    const [bend, setBend] = useState(4); // -30 < x < 41
@@ -33,7 +34,9 @@ function Home() {
    };
 
    return (
+      <>
       <div className="home-wrapper">
+      <Navbar className="navbar"/>
          <div className="home-top-row">
             <div className="avatar-and-controls">
                <Avatar bend={bend} setBend={setBend} />
@@ -63,6 +66,7 @@ function Home() {
             </button>
          </div>
       </div>
+      </>
    );
 }
 
