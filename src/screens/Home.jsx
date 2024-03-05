@@ -28,20 +28,15 @@ function Home() {
       <div className="home-wrapper">
       <Navbar className="navbar"/>
       <div className="home-top-row">
+         <div className="vertical-flex">
          <h1 className="greeting">Hello, User</h1>
+         <Controls />
+         </div>
             <div className="avatar-and-controls">
                <Avatar bend={bend} setBend={setBend} />
-               <Controls />
             </div>
          </div>
          <div className="home-bottom-row">
-            <button
-               onClick={() => saveMetric(3, 80)}
-               className="pump-air-button"
-            >
-               Pump Air
-            </button>
-           
          </div>
       </div>
       </>
