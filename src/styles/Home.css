@@ -6,6 +6,7 @@
    border-style: solid;
    border-width: 1px;
    border-color: white;
+   background-color: #19192e;
 }
 
 .avatar-control-panel {
@@ -138,7 +139,7 @@
    width: 180px;
    height: 130px;
    border-radius: 5px;
-   color: #FFB803;
+   color: #858BFF;
    font-weight: bold;
 }
 

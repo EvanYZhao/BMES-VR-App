@@ -33,7 +33,7 @@ function Home() {
          <Controls />
          </div>
             <div className="avatar-and-controls">
-               <Avatar bend={bend} setBend={setBend} />
+               <Avatar className="avatar" bend={bend} setBend={setBend} />
             </div>
          </div>
          <div className="home-bottom-row">
