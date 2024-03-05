@@ -9,7 +9,7 @@ import { userCollection } from "../database/firestore";
 
 function Home() {
    const { logOut, user } = UserAuth();
-   const WS_URL = `bmes-vr-app-backend-production.up.railway.app?uid=${user.uid}`; // Change after server deployment
+   const WS_URL = `wss://monkfish-app-co2tn.ondigitalocean.app/?uid=${user.uid}`; // Change after server deployment
    const connection = useRef(null);
    const [bend, setBend] = useState(4); // -34.69 < x < 81.40
    const [degrees, setDegrees] = useState(0); // -90 < x < 180
@@ -61,7 +61,7 @@ function Home() {
          <div className="home-top-row">
             <div className="avatar-and-controls">
                <Avatar bend={bend} setBend={setBend} degrees={degrees} />
-               <Controls />
+               {/* <Controls /> */}
             </div>
             <Metrics flexion_score={33} extension_score={78} />
          </div>

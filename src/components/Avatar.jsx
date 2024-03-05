@@ -178,10 +178,10 @@ export default function Avatar({ bend, setBend, degrees }) {
       <div className="avatar-container">
          <p>{degrees} degrees</p>
          <div className="avatar-control-panel">
-            <button onClick={flexion}>Flex</button>
+            {/* <button onClick={flexion}>Flex</button>
             <button onClick={extension}>Extend</button>
             <button onClick={resetModel}>Reset Model</button>
-            <button onClick={resetCamera}>Reset Camera</button>
+            <button onClick={resetCamera}>Reset Camera</button> */}
          </div>
          <div ref={mountRef}></div>
       </div>
