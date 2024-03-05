@@ -16,18 +16,36 @@ export default function Controls() {
 
    return (
       <div>
-      <h2>Controls</h2>
+      <div className="control-header">Controls</div>
       <div className="controls-bg">
+         <div className="row-flex">
          <button
                onClick={() => saveMetric(3, 80)}
                className="pump-air-button"
             >
                Pump Air
             </button>
+         <div className="metric-card">
+            Amount of Air
+            <br/> 
+         <div className="metric-score">
+         1 atm
+         </div>
+         </div>
+         <div className="metric-card">
+            Degrees
+            <br/> 
+         <div className="metric-score">
+         0°
+         </div>
+         </div>
+         </div>
       </div> 
-      <h2 style={{ textAlign: "left" }}>Metrics</h2>
+      <div>
+      <div className="control-header">Metrics</div>
       <div className="controls-bg">
       <Metrics flexion_score={30} extension_score={50}></Metrics>
+      </div>
       </div>
       </div>
    );

@@ -112,9 +112,9 @@
 .controls-bg{
    background-color: #19192e;
    justify-content: center;
-   border-radius: 3px;
-   width: 400px;
-   height: 130px;
+   border-radius: 8px;
+   width: 500px;
+   height: 150px;
 }
 
 .screen-label{
@@ -124,8 +124,45 @@
 }
 
 .metrics{
-   font-family: inherit;
-   font-weight: lighter;
+   font-family:'Trebuchet MS';
+   font-weight: 100;
    margin-top: 20px;
    font-size: 15px;
+}
+
+.metric-card{
+   justify-content: center;
+   text-align: center;
+   background-color: #2A273E;
+   margin: 10px;
+   width: 180px;
+   height: 130px;
+   border-radius: 5px;
+   color: #FFB803;
+   font-weight: bold;
+}
+
+.metric-score{
+   font-size: 40px;
+   margin-top: 10px;
+   color: white;
+   font-weight:normal;
+}
+
+.control-header{
+   font-family: 'Trebuchet MS';
+   font-size: 25px;
+   margin: 2px;
+}
+
+.pump-air-button{
+   margin: 50px;
+   border-style: solid;
+   border-color: white;
+}
+
+.pump-air-button:hover{
+   margin: 50px;
+   border-style: solid;
+   border-color:#535bf2;
 }
