@@ -82,3 +82,15 @@ button:hover {
       background-color: #f9f9f9;
    }
 }
+
+
+.face-1{
+   fill:gold;
+}
+
+.mouth{
+   fill: none;
+   stroke: #000;
+   stroke-width:6px;
+   stroke-linecap:round;
+}

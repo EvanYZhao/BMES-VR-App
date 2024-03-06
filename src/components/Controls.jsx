@@ -1,6 +1,7 @@
 import React from "react";
 import { userCollection } from "../database/firestore";
 import Metrics from "./Metrics";
+import Survey from "./Survey";
 
 export default function Controls() {
    const saveMetric = (numPumps=0, postureScore=null) => {
