@@ -27,7 +27,7 @@ export default function Avatar({ bend, setBend }) {
    function initScene() {
       // Initialize scene
       scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x444444);
+      scene.background = new THREE.Color("#060017");
 
       // Initialize camera
       camera = new THREE.PerspectiveCamera(
@@ -189,7 +189,6 @@ export default function Avatar({ bend, setBend }) {
 
    return (
       <div className="avatar-container">
-         <p>{degrees} degrees</p>
          <div className="avatar-control-panel">
             <button onClick={flexion}>Flex</button>
             <button onClick={extension}>Extend</button>
@@ -197,6 +196,7 @@ export default function Avatar({ bend, setBend }) {
             <button onClick={resetCamera}>Reset Camera</button>
          </div>
          <div ref={mountRef}></div>
+         <p>{degrees} degrees</p>
       </div>
    );
 }
