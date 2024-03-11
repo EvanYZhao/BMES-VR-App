@@ -2,24 +2,24 @@ import { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { UserAuth } from "../context/AuthContext";
 
 var modelCache = {};
 
-export default function Avatar({ bend, setBend, degrees }) {
-   const [buttonDegrees, setButtonDegrees] = useState(0);
+export default function Avatar() {
+   const [degrees, setDegrees] = useState(0);
+   const [bend, setBend] = useState(4); // -34.69 < x < 81.40
 
-   function scaleDegrees(degrees) {
-      let newDegrees = degrees + 4;
-      setButtonDegrees(newDegrees - 4);
-      return newDegrees;
-   }
+   const { logOut, user } = UserAuth();
 
    let scene, camera, renderer, orbit, lights, loader, mesh;
 
    const mountRef = useRef(null);
 
-   console.log(buttonDegrees);
-   console.log(`bend value: ${bend}`)
+   const WS_URL = `wss://monkfish-app-co2tn.ondigitalocean.app/?uid=${user.uid}`;
+   const connection = useRef(null);
+
+   /* START AVATAR RENDERING FUNCTIONS */
 
    function initScene() {
       // Initialize scene
@@ -108,28 +108,9 @@ export default function Avatar({ bend, setBend, degrees }) {
       renderer.render(scene, camera);
    }
 
-   function flexion() {
-      if (buttonDegrees < 180) {
-         setBend((prevBend) => prevBend + 0.43);
-         setButtonDegrees((degrees) => degrees + 1);
-      }
-   }
+   /* END AVATAR RENDERING FUNCTIONS */
 
-   function extension() {
-      if (buttonDegrees > -90) {
-         setBend((prevBend) => prevBend - 0.43);
-         setButtonDegrees((degrees) => degrees - 1);
-      }
-   }
-
-   function resetModel() {
-      setBend(scaleDegrees(0));
-   }
-
-   function resetCamera() {
-      camera.position.set(0, 0, 3);
-      camera.rotation.set(0, 0, 0);
-   }
+   /* START UTILITY FUNCTIONS */
 
    function onWindowResize() {
       var new_width = window.innerWidth / 3.3;
@@ -138,6 +119,43 @@ export default function Avatar({ bend, setBend, degrees }) {
       renderer.setSize(new_width, new_height);
       camera.updateProjectionMatrix();
    }
+
+   function resetCamera() {
+      camera.position.set(0, 0, 3);
+      camera.rotation.set(0, 0, 0);
+   }
+
+   const degreesToBend = (deg) => {
+      const fac = 0.43;
+      return deg * fac + 4;
+   };
+
+   function scaleDegrees(degrees) {
+      let newDegrees = degrees + 4;
+      setDegrees(newDegrees - 4);
+      return newDegrees;
+   }
+
+   function flexion() {
+      if (buttonDegrees < 180) {
+         setBend((prevBend) => prevBend + 0.43);
+         setDegrees((degrees) => degrees + 1);
+      }
+   }
+
+   function extension() {
+      if (buttonDegrees > -90) {
+         setBend((prevBend) => prevBend - 0.43);
+         setDegrees((degrees) => degrees - 1);
+      }
+   }
+
+   function resetModel() {
+      setBend(scaleDegrees(0));
+      setDegrees(0);
+   }
+
+   /* END UTILITY FUNCTIONS */
 
    useEffect(() => {
       window.addEventListener("resize", onWindowResize, false);
@@ -174,13 +192,30 @@ export default function Avatar({ bend, setBend, degrees }) {
       };
    }, [bend]);
 
+   useEffect(() => {
+      const socket = new WebSocket(WS_URL);
+
+      socket.addEventListener("open", (ws) => {
+         connection.current = ws;
+      });
+
+      socket.addEventListener("close", () => {
+         connection.current = null;
+      });
+
+      socket.addEventListener("message", (data) => {
+         setBend(degreesToBend(parseFloat(data.data)));
+         setDegrees(data.data);
+      });
+   }, []);
+
    return (
       <div className="avatar-container">
          <div className="avatar-control-panel">
             {/* <button onClick={flexion}>Flex</button>
             <button onClick={extension}>Extend</button>
-            <button onClick={resetModel}>Reset Model</button>
-            <button onClick={resetCamera}>Reset Camera</button> */}
+            <button onClick={resetModel}>Reset Model</button>*/}
+            <button onClick={resetCamera}>Reset Camera</button>
          </div>
          <div ref={mountRef}></div>
          <p>{degrees} degrees</p>
