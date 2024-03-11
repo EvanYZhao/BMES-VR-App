@@ -5,24 +5,21 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 var modelCache = {};
 
-export default function Avatar({ bend, setBend }) {
-
-   const [degrees, setDegrees] = useState(0);
+export default function Avatar({ bend, setBend, degrees }) {
+   const [buttonDegrees, setButtonDegrees] = useState(0);
 
    function scaleDegrees(degrees) {
       let newDegrees = degrees + 4;
-      setDegrees(newDegrees-4);
+      setButtonDegrees(newDegrees - 4);
       return newDegrees;
    }
 
-
    let scene, camera, renderer, orbit, lights, loader, mesh;
-
-   const state = { animateBones: false };
 
    const mountRef = useRef(null);
 
-   console.log(degrees)
+   console.log(buttonDegrees);
+   console.log(`bend value: ${bend}`)
 
    function initScene() {
       // Initialize scene
@@ -100,18 +97,8 @@ export default function Avatar({ bend, setBend }) {
    function render() {
       requestAnimationFrame(render);
 
-      let factor = Math.sin(Date.now() * 0.001);
-
-      if (state.animateBones) {
-         if (factor < 0) {
-            setBend(30 * factor);
-         } else {
-            setBend(41 * factor);
-         }
-      }
-
       for (let i = 15; i < 18; i++) {
-         mesh.skeleton.bones[i].rotation.x = bend / mesh.skeleton.bones.length; // -30 < x < 41
+         mesh.skeleton.bones[i].rotation.x = bend / mesh.skeleton.bones.length; // -34.69 < x < 81.40
       }
 
       mesh.skeleton.update();
@@ -122,16 +109,16 @@ export default function Avatar({ bend, setBend }) {
    }
 
    function flexion() {
-      if(degrees < 180){
+      if (buttonDegrees < 180) {
          setBend((prevBend) => prevBend + 0.43);
-         setDegrees(degrees => degrees + 1);
+         setButtonDegrees((degrees) => degrees + 1);
       }
    }
 
    function extension() {
-      if(degrees > -90){
+      if (buttonDegrees > -90) {
          setBend((prevBend) => prevBend - 0.43);
-         setDegrees(degrees => degrees - 1);
+         setButtonDegrees((degrees) => degrees - 1);
       }
    }
 
@@ -190,10 +177,10 @@ export default function Avatar({ bend, setBend }) {
    return (
       <div className="avatar-container">
          <div className="avatar-control-panel">
-            <button onClick={flexion}>Flex</button>
+            {/* <button onClick={flexion}>Flex</button>
             <button onClick={extension}>Extend</button>
             <button onClick={resetModel}>Reset Model</button>
-            <button onClick={resetCamera}>Reset Camera</button>
+            <button onClick={resetCamera}>Reset Camera</button> */}
          </div>
          <div ref={mountRef}></div>
          <p>{degrees} degrees</p>
