@@ -6,6 +6,7 @@ import Metrics from "../components/Metrics";
 import "../styles/Home.css";
 import { UserAuth } from "../context/AuthContext";
 import { userCollection } from "../database/firestore";
+import {Navbar} from "../components/Navbar";
 
 function Home() {
    const { logOut, user } = UserAuth();
@@ -57,36 +58,23 @@ function Home() {
    }, []);
 
    return (
+      <>
       <div className="home-wrapper">
-         <div className="home-top-row">
+      <Navbar className="navbar"/>
+      <div className="home-top-row">
+         <div className="vertical-flex">
+         <h1 className="greeting">Hello, User</h1>
+         <Controls />
+         </div>
             <div className="avatar-and-controls">
-               <Avatar bend={bend} setBend={setBend} degrees={degrees} />
+               <Avatar className="avatar" bend={bend} setBend={setBend} degrees={degrees} />
                {/* <Controls /> */}
             </div>
-            <Metrics flexion_score={33} extension_score={78} />
          </div>
          <div className="home-bottom-row">
-            <button
-               onClick={() => saveMetric(3, 80)}
-               className="pump-air-button"
-            >
-               Pump Air
-            </button>
-            <button
-               onClick={() =>
-                  navigate("/calibration", { state: { isNewUser: false } })
-               }
-               className="recalibrate-button"
-            >
-               Recalibrate
-            </button>
-         </div>
-         <div className="home-log-out-row">
-            <button style={{ color: "#970C10" }} onClick={handleSignOut}>
-               Log Out
-            </button>
          </div>
       </div>
+      </>
    );
 }
 

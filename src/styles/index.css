@@ -12,7 +12,9 @@ body {
 
    color-scheme: light dark;
    color: rgba(255, 255, 255, 0.87);
-   background-color: #242424;
+   background-color: #060017;
+   background-image: linear-gradient(to right, #060017 , #191329);
+
 
    font-synthesis: none;
    text-rendering: optimizeLegibility;
@@ -43,13 +45,13 @@ h1 {
 }
 
 button {
-   border-radius: 8px;
+   border-radius: 0px;
    border: 1px solid transparent;
    padding: 0.6em 1.2em;
    font-size: 1em;
    font-weight: 500;
    font-family: inherit;
-   background-color: #1a1a1a;
+   background-color: #19192e;
    cursor: pointer;
 }
 
@@ -62,7 +64,10 @@ circular-metric {
 
 
 button:hover {
-   border-color: #646cff;
+   border-bottom-color: #646cff;
+   border-radius: 0;
+   color: #646cff;
+   border-width: 1px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -76,4 +81,16 @@ button:hover {
    button {
       background-color: #f9f9f9;
    }
+}
+
+
+.face-1{
+   fill:gold;
+}
+
+.mouth{
+   fill: none;
+   stroke: #000;
+   stroke-width:6px;
+   stroke-linecap:round;
 }
