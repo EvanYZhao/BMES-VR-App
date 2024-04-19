@@ -31,6 +31,7 @@ function Home() {
                <div className="avatar-and-controls">
                   <Avatar className="avatar" />
                   {/* <Controls /> */}
+                  {/* <iframe ></iframe> */}
                </div>
             </div>
             <div className="home-bottom-row"></div>

@@ -16,7 +16,8 @@ export default function Avatar() {
 
    const mountRef = useRef(null);
 
-   const WS_URL = `wss://monkfish-app-co2tn.ondigitalocean.app/?uid=${user.uid}`;
+   const PROD_WS_URL = `wss://monkfish-app-co2tn.ondigitalocean.app/?uid=${user.uid}`;
+   const DEV_WS_URL = `ws://localhost:8080/?uid=${user.uid}`;
    const connection = useRef(null);
 
    /* START AVATAR RENDERING FUNCTIONS */
@@ -193,7 +194,7 @@ export default function Avatar() {
    }, [bend]);
 
    useEffect(() => {
-      const socket = new WebSocket(WS_URL);
+      const socket = new WebSocket(PROD_WS_URL);
 
       socket.addEventListener("open", (ws) => {
          connection.current = ws;
