@@ -3,14 +3,18 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { UserAuth } from "../context/AuthContext";
+import FlexCanvas from "./FlexCanvas";
 
 var modelCache = {};
 
 export default function Avatar() {
    const [degrees, setDegrees] = useState(0);
+   const [cflex, setcflex] = useState(0);
+   const [tflex, settflex] = useState(0);
+   const [lflex, setlflex] = useState(0);
    const [bend, setBend] = useState(4); // -34.69 < x < 81.40
 
-   const { logOut, user } = UserAuth();
+   const { user } = UserAuth();
 
    let scene, camera, renderer, orbit, lights, loader, mesh;
 
@@ -205,21 +209,31 @@ export default function Avatar() {
       });
 
       socket.addEventListener("message", (data) => {
-         setBend(degreesToBend(parseFloat(data.data)));
-         setDegrees(data.data);
+         const parsed = JSON.parse(data.data)
+         const angle  = parsed.angle
+         const cervical_flex_reading = parsed.cflex
+         const thoracic_flex_reading = parsed.tflex
+         const lumbar_flex_reading = parsed.lflex
+         setBend(degreesToBend(parseFloat(angle)));
+         setDegrees(angle);
+         setcflex(cervical_flex_reading);
+         settflex(thoracic_flex_reading);
+         setlflex(lumbar_flex_reading);
       });
    }, []);
 
    return (
       <div className="avatar-container">
          <div className="avatar-control-panel">
-            {/* <button onClick={flexion}>Flex</button>
-            <button onClick={extension}>Extend</button>
-            <button onClick={resetModel}>Reset Model</button>*/}
             <button onClick={resetCamera}>Reset Camera</button>
          </div>
          <div ref={mountRef}></div>
          <p>{degrees} degrees</p>
+         <div className="flex-sensors">
+            <FlexCanvas sensor_type={"Cervical Spine Flex Sensor"} flex_reading={cflex}/>
+            <FlexCanvas sensor_type={"Thoracic Spine Flex Sensor"} flex_reading={tflex}/>
+            <FlexCanvas sensor_type={"Lumbar Spine Flex Sensor"} flex_reading={lflex}/>
+         </div>
       </div>
    );
 }
