@@ -7,21 +7,17 @@ import FlexCanvas from "./FlexCanvas";
 
 var modelCache = {};
 
-export default function Avatar() {
+export default function Avatar({ socket }) {
    const [degrees, setDegrees] = useState(0);
    const [cflex, setcflex] = useState(0);
    const [tflex, settflex] = useState(0);
    const [lflex, setlflex] = useState(0);
    const [bend, setBend] = useState(4); // -34.69 < x < 81.40
 
-   const { user } = UserAuth();
-
    let scene, camera, renderer, orbit, lights, loader, mesh;
 
    const mountRef = useRef(null);
 
-   const PROD_WS_URL = `wss://monkfish-app-co2tn.ondigitalocean.app/?uid=${user.uid}`;
-   const DEV_WS_URL = `ws://localhost:8080/?uid=${user.uid}`;
    const connection = useRef(null);
 
    /* START AVATAR RENDERING FUNCTIONS */
@@ -198,8 +194,6 @@ export default function Avatar() {
    }, [bend]);
 
    useEffect(() => {
-      const socket = new WebSocket(PROD_WS_URL);
-
       socket.addEventListener("open", (ws) => {
          connection.current = ws;
       });
@@ -210,12 +204,14 @@ export default function Avatar() {
 
       socket.addEventListener("message", (data) => {
          const parsed = JSON.parse(data.data)
-         const angle  = parsed.angle
+         const angle1  = parsed.angle1
+         const angle2 = parsed.angle2
+         const angle = parseFloat(angle1) - parseFloat(angle2)
          const cervical_flex_reading = parsed.cflex
          const thoracic_flex_reading = parsed.tflex
          const lumbar_flex_reading = parsed.lflex
-         setBend(degreesToBend(parseFloat(angle)));
-         setDegrees(angle);
+         setBend(degreesToBend(angle));
+         setDegrees(angle.toFixed(2));
          setcflex(cervical_flex_reading);
          settflex(thoracic_flex_reading);
          setlflex(lumbar_flex_reading);

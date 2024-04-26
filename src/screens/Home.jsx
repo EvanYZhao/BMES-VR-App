@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import Avatar from "../components/Avatar";
 import Controls from "../components/Controls";
 import "../styles/Home.css";
@@ -8,16 +9,9 @@ import { Navbar } from "../components/Navbar";
 function Home() {
    const { user } = UserAuth();
 
-   const saveMetric = (numPumps = 0, postureScore = null) => {
-      userCollection
-         .addMetric(user.uid, numPumps, postureScore)
-         .then((r) => {
-            console.log(r);
-         })
-         .catch((e) => {
-            console.log("Error occurred saving metric:", e);
-         });
-   };
+   const PROD_WS_URL = `wss://monkfish-app-co2tn.ondigitalocean.app/?uid=${user.uid}`;
+   const DEV_WS_URL = `ws://localhost:8080/?uid=${user.uid}`;
+   const socket = new WebSocket(PROD_WS_URL)
 
    return (
       <>
@@ -26,12 +20,10 @@ function Home() {
             <div className="home-top-row">
                <div className="vertical-flex">
                   <h1 className="greeting">Hello, {user.displayName}</h1>
-                  <Controls />
+                  <Controls socket={socket} />
                </div>
                <div className="avatar-and-controls">
-                  <Avatar className="avatar" />
-                  {/* <Controls /> */}
-                  {/* <iframe ></iframe> */}
+                  <Avatar socket={socket} className="avatar" />
                </div>
             </div>
             <div className="home-bottom-row"></div>

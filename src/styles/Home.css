@@ -168,3 +168,11 @@
    border-style: solid;
    border-color:#535bf2;
 }
+
+.flex-sensors {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding-bottom: 2.5vh;
+}
