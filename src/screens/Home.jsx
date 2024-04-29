@@ -9,7 +9,7 @@ import { Navbar } from "../components/Navbar";
 function Home() {
    const { user } = UserAuth();
 
-   const PROD_WS_URL = `wss://monkfish-app-co2tn.ondigitalocean.app/?uid=${user.uid}`;
+   const PROD_WS_URL = `wss://bmes-vr-app-backend-production.up.railway.app/?uid=${user.uid}`
    const DEV_WS_URL = `ws://localhost:8080/?uid=${user.uid}`;
    const socket = new WebSocket(PROD_WS_URL)
 
