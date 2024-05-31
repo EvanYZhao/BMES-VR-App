@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "../styles/Calibration.css";
-import Avatar from "../components/Avatar";
 import { useNavigate } from "react-router-dom";
 import CalibrationInstruction from "../components/CalibrationInstruction";
 

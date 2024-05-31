@@ -1,10 +1,8 @@
-import { useRef } from "react";
 import Avatar from "../components/Avatar";
 import Controls from "../components/Controls";
 import "../styles/Home.css";
-import { UserAuth } from "../context/AuthContext";
-import { userCollection } from "../database/firestore";
 import { Navbar } from "../components/Navbar";
+import { UserAuth } from "../context/AuthContext";
 
 function Home() {
    const { user } = UserAuth();

@@ -137,24 +137,6 @@ export default function Avatar({ socket }) {
       return newDegrees;
    }
 
-   function flexion() {
-      if (buttonDegrees < 180) {
-         setBend((prevBend) => prevBend + 0.43);
-         setDegrees((degrees) => degrees + 1);
-      }
-   }
-
-   function extension() {
-      if (buttonDegrees > -90) {
-         setBend((prevBend) => prevBend - 0.43);
-         setDegrees((degrees) => degrees - 1);
-      }
-   }
-
-   function resetModel() {
-      setBend(scaleDegrees(0));
-      setDegrees(0);
-   }
 
    /* END UTILITY FUNCTIONS */
 
@@ -204,14 +186,15 @@ export default function Avatar({ socket }) {
 
       socket.addEventListener("message", (data) => {
          const parsed = JSON.parse(data.data)
-         const angle1  = parsed.angle1
-         const angle2 = parsed.angle2
-         const angle = parseFloat(angle1) - parseFloat(angle2)
+         const angle1  = parseFloat(parsed.angle1)
+         const angle2 = parseFloat(parsed.angle2)
+         const slouch_angle = angle1 - angle2
          const cervical_flex_reading = parsed.cflex
          const thoracic_flex_reading = parsed.tflex
          const lumbar_flex_reading = parsed.lflex
-         setBend(degreesToBend(angle));
-         setDegrees(angle.toFixed(2));
+         console.log(slouch_angle)
+         setBend(degreesToBend(slouch_angle));
+         setDegrees((slouch_angle).toFixed(2));
          setcflex(cervical_flex_reading);
          settflex(thoracic_flex_reading);
          setlflex(lumbar_flex_reading);

@@ -22,7 +22,7 @@ export const Navbar = () => {
         <>
         <div className="navbar-bg">
         <div className="logo">
-            VerteFLEX
+            Vertiflex
         </div>
         <nav>
         <div className="button-wrap">

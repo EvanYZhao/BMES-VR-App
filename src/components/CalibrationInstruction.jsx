@@ -6,7 +6,7 @@ import CircularMetric from "../components/CircularMetrics";
 import { userCollection } from "../database/firestore";
 import { UserAuth } from "../context/AuthContext";
 
-export default function CalibrationInstruction() {
+export default function CalibrationInstruction({ socket }) {
    const [counter, setCounter] = useState(0);
    const [input, setInput] = useState(0);
    const [bend, setBend] = useState(4);
@@ -105,7 +105,7 @@ export default function CalibrationInstruction() {
                               Calibration Model
                            </h1>
 
-                           <Avatar bend={bend} setBend={setBend} />
+                           <Avatar socket={socket} />
 
                            {/* instruction button: we will likely need to store the appropriate bend value to the backend
                                         - TODO: figure out database structure

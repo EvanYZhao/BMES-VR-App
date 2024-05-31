@@ -1,4 +1,5 @@
 import React from "react";
+import wip from '../assets/wip.png'
 
 export default function Metrics({ flexion_score, extension_score }) {
    return (
@@ -8,21 +9,21 @@ export default function Metrics({ flexion_score, extension_score }) {
          Flexion 
          <br/> 
          <div className="metric-score">
-         {flexion_score}%
+         <img className="wip-img" src={wip} />
          </div>
          </div>
          <div className="metric-card">
             Extension
          <br/> 
          <div className="metric-score">
-         {extension_score}%
+         <img className="wip-img" src={wip} />
          </div>
          </div>
          <div className="metric-card">
          Total
          <br/> 
          <div className="metric-score">
-         {(flexion_score + extension_score) / 2}%         
+         <img className="wip-img" src={wip} />   
          </div>
          </div>
          </div>
