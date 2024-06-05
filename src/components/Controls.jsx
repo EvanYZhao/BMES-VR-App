@@ -4,19 +4,23 @@ import Survey from "./Survey";
 import wip from "../assets/wip.png";
 
 export default function Controls({ socket }) {
-    const [on, toggle] = useState(false);
+    const [pumpsOn, togPumps] = useState(false);
+    const [solOn, togSols] = useState(false);
 
     const togglePumps = () => {
-        toggle(!on);
+        togPumps(!pumpsOn);
         const payload = {
-            pump_power: !on,
-            angular_vel1: null,
-            angular_vel2: null,
-            cflex: null,
-            tflex: null,
-            lflex: null,
+            pump_power: !pumpsOn,
         };
         socket.send(JSON.stringify(payload));
+    };
+
+    const toggleSolenoids = () => {
+        togSols(!solOn);
+        const payload = {
+            solenoid_power: !solOn,
+        };
+        socket.send(JSON.stringify(payload))
     };
 
     return (
@@ -28,15 +32,22 @@ export default function Controls({ socket }) {
                         onClick={() => togglePumps()}
                         className="pump-air-button"
                     >
-                        {on ? "Stop Air" : "Pump Air"}
+                        {pumpsOn ? "Stop Air" : "Pump Air"}
                     </button>
-                    <div className="metric-card">
+                    <button
+                        onClick={() => toggleSolenoids()}
+                        className="toggle-solenoid-button"
+                    >
+                        {solOn ? "Stop Deflating" : "Deflate"}
+                    </button>
+
+                    {/* <div className="metric-card">
                         Amount of Air
                         <br />
                         <div className="metric-score">
                             <img className="wip-img" src={wip} />
                         </div>
-                    </div>
+                    </div> */}
                     <div className="metric-card">
                         Degrees
                         <br />
