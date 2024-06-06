@@ -33,8 +33,8 @@ export const Navbar = () => {
                   navigate("/calibration", { state: { isNewUser: false } })
                }>Calibrate</button>
             <button className="navbar-buttons" onClick={() =>
-                  navigate("/", { state: { isNewUser: false } })
-            }>Metrics</button>
+                  navigate("/survey", { state: { isNewUser: false } })
+            }>Survey</button>
             <button className="navbar-buttons" style={{ color: "#ff002f" }} onClick={handleSignOut}>Log Out</button>
         </div>
         </nav>

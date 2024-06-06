@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Calibration from "./screens/Calibration";
 import Home from "./screens/Home";
 import SignIn from "./screens/SignIn";
+import Survey from "./screens/Survey";
 import { AuthContextProvider } from "./context/AuthContext.jsx";
 import { DataContextProvider } from "./context/DataContext.jsx";
 import Protected from "./components/Protected.jsx";
@@ -30,6 +31,14 @@ const Router = () => {
                   }
                />
                <Route path="/signin" element={<SignIn />} />
+               <Route
+                  path="/survey"
+                  element={
+                     <Protected>
+                        <Survey />
+                     </Protected>
+                  }
+               />
             </Routes>
          </DataContextProvider>
       </AuthContextProvider>

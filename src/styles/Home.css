@@ -184,3 +184,19 @@
    height: auto;
    object-fit: contain;
 }
+
+.horizontal-flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 200px;
+}
+
+.slider{
+    width: 200px;
+}
+
+.spinal-img{
+    width: 100px;
+    height: 300px;
+}
