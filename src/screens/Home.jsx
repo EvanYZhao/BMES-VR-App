@@ -17,7 +17,7 @@ function Home() {
             <Navbar className="navbar" />
             <div className="home-top-row">
                <div className="vertical-flex">
-                  <h1 className="greeting">Hello, {user.displayName}</h1>
+                   <h1 className="greeting">Hello, John Doe{/*{user.displayName}*/}</h1> 
                   <Controls socket={socket} />
                </div>
                <div className="avatar-and-controls">

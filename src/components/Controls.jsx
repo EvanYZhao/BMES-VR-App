@@ -48,21 +48,21 @@ export default function Controls({ socket }) {
                             <img className="wip-img" src={wip} />
                         </div>
                     </div> */}
-                    <div className="metric-card">
+                    {/* <div className="metric-card">
                         Degrees
                         <br />
                         <div className="metric-score">
                             <img className="wip-img" src={wip} />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
-            <div>
+            {/* <div>
                 <div className="control-header">Metrics</div>
                 <div className="controls-bg">
                     <Metrics flexion_score={30} extension_score={50}></Metrics>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

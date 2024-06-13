@@ -160,13 +160,15 @@
 }
 
 .pump-air-button {
-    margin: 50px;
+    margin-top: 45px;
+    height: 50px;
     border-style: solid;
     border-color: white;
 }
 
 .toggle-solenoid-button {
-    margin: 50px;
+    margin-top: 45px;
+    height: 50px;
     border-style: solid;
     border-color: white;
 }
@@ -177,8 +179,12 @@
 }
 
 .pump-air-button:hover {
-    margin: 50px;
-    border-style: solid;
+    /* margin: 50px;
+    border-style: solid; */
+    border-color: #535bf2;
+}
+
+.toggle-solenoid-button:hover {
     border-color: #535bf2;
 }
 
